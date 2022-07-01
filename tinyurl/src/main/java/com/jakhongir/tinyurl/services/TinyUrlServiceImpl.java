@@ -1,6 +1,7 @@
 package com.jakhongir.tinyurl.services;
 
 import com.jakhongir.tinyurl.entities.TinyUrlEntity;
+import com.jakhongir.tinyurl.exceptions.customExceptions.InvalidShortUrlException;
 import com.jakhongir.tinyurl.repositories.TinyUrlRepository;
 import org.springframework.stereotype.Service;
 
@@ -63,7 +64,7 @@ public class TinyUrlServiceImpl implements TinyUrlService{
     @Override
     public String getLongUrl(String shortUrl) {
         return tinyUrlRepository.findByShortUrl(shortUrl)
-                .orElseThrow()
+                .orElseThrow(() -> new InvalidShortUrlException("given short url is not valid"))
                 .getLongUrl();
     }
 

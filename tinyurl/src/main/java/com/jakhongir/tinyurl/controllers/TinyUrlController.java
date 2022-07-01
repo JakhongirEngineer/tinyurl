@@ -5,6 +5,7 @@ import com.jakhongir.tinyurl.exceptions.customExceptions.ShortUrlNotProvidedExce
 import com.jakhongir.tinyurl.services.TinyUrlService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -17,15 +18,15 @@ public class TinyUrlController {
     }
 
     @PostMapping("/shorten")
-    public String shortenUrl(@RequestParam(name = "longUrl") Optional<String> longUrlOptional) {
+    public Map<String,String> shortenUrl(@RequestParam(name = "longUrl") Optional<String> longUrlOptional) {
         String longUrl = longUrlOptional.orElseThrow(() -> new LongUrlNotProvidedException("longUrl is not provided"));
-        return tinyUrlService.shorten(longUrl);
+        return Map.of("shortUlr", tinyUrlService.shorten(longUrl));
     }
 
 
     @GetMapping("/{shortUrl}")
-    public String getLongUrl(@PathVariable(name = "shortUrl") Optional<String> shortUrlOptional) {
+    public Map<String,String> getLongUrl(@PathVariable(name = "shortUrl") Optional<String> shortUrlOptional) {
         String shortUrl = shortUrlOptional.orElseThrow(() -> new ShortUrlNotProvidedException("shortUrl is not provided"));
-        return tinyUrlService.getLongUrl(shortUrl);
+        return Map.of("longUrl", tinyUrlService.getLongUrl(shortUrl));
     }
 }
