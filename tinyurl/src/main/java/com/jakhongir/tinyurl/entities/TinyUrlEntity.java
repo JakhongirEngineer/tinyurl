@@ -1,6 +1,7 @@
 package com.jakhongir.tinyurl.entities;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -8,7 +9,9 @@ import javax.persistence.Id;
 public class TinyUrlEntity {
     @Id
     private Long id;
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String longUrl;
+    @Column(nullable = false)
     private String shortUrl;
 
     public TinyUrlEntity() {
