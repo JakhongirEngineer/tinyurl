@@ -17,7 +17,7 @@ public class TinyUrlController {
     }
 
     @PostMapping("/shorten")
-    public String shortenUrl(@RequestParam(name = "longUrlOptional") Optional<String> longUrlOptional) {
+    public String shortenUrl(@RequestParam(name = "longUrl") Optional<String> longUrlOptional) {
         String longUrl = longUrlOptional.orElseThrow(() -> new LongUrlNotProvidedException("longUrl is not provided"));
         return tinyUrlService.shorten(longUrl);
     }
