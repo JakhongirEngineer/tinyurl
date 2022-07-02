@@ -3,6 +3,7 @@ package com.jakhongir.tinyurl.services;
 import com.jakhongir.tinyurl.entities.TinyUrlEntity;
 import com.jakhongir.tinyurl.exceptions.customExceptions.InvalidShortUrlException;
 import com.jakhongir.tinyurl.repositories.TinyUrlRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -13,9 +14,11 @@ import java.util.Optional;
 public class TinyUrlServiceImpl implements TinyUrlService{
 
     private final TinyUrlRepository tinyUrlRepository;
-
-    public TinyUrlServiceImpl(TinyUrlRepository tinyUrlRepository) {
+    private final UniqueIdGenerator uniqueIdGenerator;
+    @Autowired
+    public TinyUrlServiceImpl(TinyUrlRepository tinyUrlRepository, UniqueIdGenerator uniqueIdGenerator) {
         this.tinyUrlRepository = tinyUrlRepository;
+        this.uniqueIdGenerator = uniqueIdGenerator;
     }
 
     @Override
@@ -29,6 +32,7 @@ public class TinyUrlServiceImpl implements TinyUrlService{
         // TODO
         // 1. get unique id from unique id generator
         long uniqueId = 111111L; // needs to be implemented;
+
         //TODO
 
         // 2. convert unique id into string using 'base 62 conversion'
