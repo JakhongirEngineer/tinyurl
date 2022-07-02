@@ -19,7 +19,8 @@ public class TinyUrlServiceImpl implements TinyUrlService{
     }
 
     @Override
-    public String shorten(String longUrl) {
+    public String shorten(String longUrlWithWhitespace) {
+        String longUrl = longUrlWithWhitespace.replaceAll(" ", "%20");
         Optional<TinyUrlEntity> optionalTinyUrlEntity = tinyUrlRepository.findByLongUrl(longUrl);
 
         if (optionalTinyUrlEntity.isPresent()) {
